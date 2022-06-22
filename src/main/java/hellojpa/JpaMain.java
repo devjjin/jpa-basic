@@ -15,40 +15,28 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
 
-        /*
-        // 등록
         try {
+            //비영속
             Member member = new Member();
-            member.setId(2L);
-            member.setName("hello2");
+            //member.setId(10L);
+            member.setId(101L);
+            member.setName("helloJPA");
+
+            //영속
+            System.out.println("========before=====");
             em.persist(member);
-            tx.commit();
-        } catch (Exception e) {
-            tx.rollback();
-        } finally {
-            em.close();
-        }
-        // 수정
-        try {
-            Member findMember = em.find(Member.class, 1L);
-            findMember.setName("changeName");
-            tx.commit();
-        } catch (Exception e) {
-            tx.rollback();
-        } finally {
-            em.close();
-        }
-         */
+            System.out.println("========after=======");
 
-        // 삭제
-        try {
-            Member findMember = em.find(Member.class, 1L);
-            em.remove(findMember);
+            Member findMember = em.find(Member.class, 101L);
+
+            System.out.println("findMember.getId() = " + findMember.getId());
+            System.out.println("findMember.getName() = " + findMember.getName());
 
             tx.commit();
-        } catch (Exception e) {
+
+        } catch (Exception e){
             tx.rollback();
-        } finally {
+        } finally{
             em.close();
         }
 
