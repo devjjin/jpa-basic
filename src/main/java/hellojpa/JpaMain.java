@@ -27,10 +27,13 @@ public class JpaMain {
             parent.addChild(child1);
             parent.addChild(child2);
 
-            // persist 세번 해야함, cascade로 해주면 한번만 parent만 넣어도됨
             em.persist(parent);
-            //em.persist(child1);
-            //em.persist(child2);
+            
+            em.flush();
+            em.clear();
+
+            Parent findParent = em.find(Parent.class, parent.getId());
+            findParent.getChildList().remove(0);
 
             tx.commit();
         } catch (Exception e){

@@ -12,7 +12,7 @@ public class Parent {
 
     private String name;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Child> childList = new ArrayList<>();
 
     // 연관관계 편의 메서드 - 양방관계 걸림
