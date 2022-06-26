@@ -2,6 +2,8 @@ package hellojpa;
 
 import javax.persistence.*;
 
+import static javax.persistence.FetchType.LAZY;
+
 @Entity
 public class Child {
 
@@ -12,9 +14,10 @@ public class Child {
     private String name;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "PARENT_ID")
     private Parent parent;
+
     public Long getId() {
         return id;
     }

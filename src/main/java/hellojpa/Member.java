@@ -2,6 +2,10 @@ package hellojpa;
 
 import javax.persistence.*;
 
+import java.time.LocalDateTime;
+
+import static javax.persistence.FetchType.LAZY;
+
 @Entity
 public class Member extends BaseEntity{
 
@@ -12,10 +16,17 @@ public class Member extends BaseEntity{
     @Column(name = "USERNAME")
     private String username;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "TEAM_ID")
     private Team team;
 
+    // 기간
+    @Embedded
+    private Period workPeriod;
+
+    // 주소
+    @Embedded
+    private Address homeAddress;
     public Long getId() {
         return id;
     }
@@ -40,4 +51,19 @@ public class Member extends BaseEntity{
         this.team = team;
     }
 
+    public Period getWorkPeriod() {
+        return workPeriod;
+    }
+
+    public void setWorkPeriod(Period workPeriod) {
+        this.workPeriod = workPeriod;
+    }
+
+    public Address getHomeAddress() {
+        return homeAddress;
+    }
+
+    public void setHomeAddress(Address homeAddress) {
+        this.homeAddress = homeAddress;
+    }
 }
